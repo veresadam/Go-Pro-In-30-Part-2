@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Go Pro In 30</title>
+		<meta charset="utf-8">
+	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<link rel="stylesheet" href="main.css"
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse" style='z-index:1'>
+		  <div class="container">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand active" href="index.html">Go Pro In 30</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li><a href="https://www.youtube.com/watch?v=9g7nYQv-kPM&t=5s">Röplabda</a></li>
+		        <li><a href="https://www.youtube.com/watch?v=wYjp2zoqQrs">Kosárlabda</a></li>
+		        <li><a href="https://www.youtube.com/watch?v=69Ap8WsenXc">Kézilabda</a><li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+
+	<div class="container container_hatter">
+
+		Mindenki volt már abban a helyzetben, amikor kimenve az udvarra meghallottuk a hátsó udvarrol a szurkolás és öromkiáltások zaját, és azonnal tudtuk mi történik: az iskola valamelyik sportcsapata játszik! Az egész iskola az udvar hátsó pályája köré gyülekezik, és lélegzetüket elfolytva figyelik a játszmát. Ez az a pillanat amikor mindenkiben legalább egyszer felmerült a gondolat, hogy csatlakozni fog az iskola valamelyik csapatához. Ez azonban legtöbb esetben egy lobbanásszerű érzés, ugyanis előfordulhat, hogy azt gondoljuk magunkról, hogy nem fogjuk időben elsajátítani a játék alapjait, s így nem fogunk érvényesülni a játékok folyamán.<br>
+		A "Go Pro In 30" egy felkészítő edzéssorozatot biztosít mindazok számára, akik elhatározták, hogy részt szeretnének venni az iskola röplabda, kézilabda, vagy kosárlabda csapatában. Az edzéssorozat 30 nap folyamán edzésprogramokat fog biztosítani a felhasználónak, egy választott sportággal kapcsolatosan, amelynek elvégzése után a sportág alapjainak teljesöru elsajátítása biztosított.<br><br>
+
+		<form class="form-inline">
+			<div class="elem_margin">
+				<div class="form-group" style="width: 100%;">
+					<table style = "width: 50%; margin-bottom: 10px;" >
+						<tr>
+					    	<td><label for="fnev">Felhasználó név: </label></td>
+					    	<td style=""><input type="text" class="form-control" id="fnev" size="20" placeholder="pl. Papp János"></td>
+					    </tr>
+					    <tr id = "jelszo-doboz" hidden>
+					    <td><label for="fjelszo">Jelszó:</label></td>
+					    <td><input type="password" class="form-control" id="fjelszo" size="20" placeholder=""></td>
+					    </tr>
+				    </table>
+			  	</div>
+			 </div>
+		  <!--div class="form-group">
+			  <div class="elem_margin">
+			    <label for="fjelszo">Jelszó: </label>
+			    <input type="password" class="form-control" size="15" id="fjelszo" placeholder="Jelszó">
+			  </div> nem lehet megcsinalni, hogy a bejelentkezes es a regisztracio olyan legyen mint a te oldaladon, hogy elhomalzosodik az egesz, es megjelenik az ablakocska? v az tul sok munka? tul sok munka, most maradunk ennel. oka
+		-->
+		  <button type="button" class="btn btn-primary btn-lg" id = "bejelentkezes">Bejelentkezés</button>
+		  <button type="button" class="btn btn-primary btn-lg" id = "tovabb">Regisztráció >></button>
+		  </div>
+		</form>
+
+	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script>
+		$("#tovabb").click(function(){
+			if($("#fnev").val() != ""){
+				window.location = "/web/kerdoiv.php?fnev=" + String($("#fnev").val());
+			}else{
+				alert("Adjon meg egy nevet!");
+			}
+			
+		});
+
+		$("#bejelentkezes").click(function(){
+			if($("#fjelszo").val() == ""){
+				$("#jelszo-doboz").fadeIn('slow');
+			}else if($("#fjelszo").val() != "" && $("#fnev").val() != ""){
+				$.ajax({
+					url : 'login.php',
+					type : 'POST',
+					data:{
+						fnev : $("#fnev").val(),
+						fjelszo : $("#fjelszo").val()
+					},
+					success:function(result){
+						result = JSON.parse(result);
+						if(result['result'] == "Sikeres"){
+							if(result['sql']['sport'] == 0){
+								alert("Meg nem választott sportot!");
+								window.location = "/web/elso.php?id=" + String(result['sql']['id']) + "&fit=" + result['sql']['physical'];
+							}else if(result['sql']['sport'] == 1){
+								window.location = "/web/r_main.php?id="+ String(result['sql']['id']);
+							}else if(result['sql']['sport'] == 3){
+								window.location = "/web/h_main.php?id="+ String(result['sql']['id']);
+							}else if(result['sql']['sport'] == 2){
+								alert("Még munkálatok allatt. Kérem válasszon egy másik sportot");
+								window.location = "/web/elso.php?id=" + String(result['sql']['id']) + "&fit=" + result['sql']['physical'];
+							}
+						}else{
+							alert(result["result"]);
+						}
+					},
+					error: function(e){
+						alert("Szerver hiba.");
+						console.log("Error: " + String(e));
+					}
+				});
+			}
+		});
+	</script>
+</body>
+</html>
